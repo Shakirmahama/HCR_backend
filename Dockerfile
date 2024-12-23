@@ -9,7 +9,7 @@ WORKDIR /app
 COPY . /app
 
 # Install dependencies (assuming requirements.txt exists)
-RUN pip install fastapi uvicorn numpy tensorflow
+RUN pip install -r requirements.txt
 
 # Expose the application port (FastAPI default is 8000)
 EXPOSE 8000
