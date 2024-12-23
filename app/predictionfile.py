@@ -1,9 +1,4 @@
-import pandas as pd
-import random as r
-import ast
 import functionsfile, Variables
-from sklearn.preprocessing import MinMaxScaler
-import numpy as np
 import tensorflow as tf
 
 #shakirdatacopy.csv
@@ -153,7 +148,7 @@ import tensorflow as tf
 def predict(coordinates, noofstroke):
     print(coordinates)
     if noofstroke == 1:
-        stroke1 = functionsfile.flattencoordmodelinput(coordinates[0],Variables.data['firststroke1'])
+        stroke1 = functionsfile.flattencoordmodelinput(coordinates[0], Variables.data['firststroke1'])
         model = tf.keras.models.load_model("model/onestrokemodel.h5")
         return_scaled_coord = functionsfile.scale_coordinates(stroke1)
         flattenarray = functionsfile.separate_coordinates(return_scaled_coord)
@@ -169,10 +164,10 @@ def predict(coordinates, noofstroke):
             orginaldata = stroke1,stroke2
             forscaled = stroke1+stroke2
             return_scaled_coord = functionsfile.scale_coordinates(forscaled)
-            coord_reshap = functionsfile.reshape_coordinates(return_scaled_coord,orginaldata)
+            coord_reshap = functionsfile.reshape_coordinates(return_scaled_coord, orginaldata)
             flattenarray = functionsfile.flatten_coord(coord_reshap)
-            s2 = functionsfile.result_of_prediction(flattenarray,model)
-            result=functionsfile.stroketwo_urdu_alphabet(s2)
+            s2 = functionsfile.result_of_prediction(flattenarray, model)
+            result= functionsfile.stroketwo_urdu_alphabet(s2)
 
         else:
             model = tf.keras.models.load_model("model/twoAstrokemodel.h5")
@@ -184,7 +179,7 @@ def predict(coordinates, noofstroke):
             coord_reshap = functionsfile.reshape_coordinates(return_scaled_coord, orginaldata)
             flattenarray = functionsfile.flatten_coord(coord_reshap)
             s2 = functionsfile.result_of_prediction(flattenarray, model)
-            result=functionsfile.stroketwoA_urdu_alphabet(s2)
+            result= functionsfile.stroketwoA_urdu_alphabet(s2)
     elif noofstroke == 3:
         # givenlistcoord = ast.literal_eval(li[row_idx][0])
         len_of_sstroke = len(coordinates[1])
@@ -199,7 +194,7 @@ def predict(coordinates, noofstroke):
             coord_reshap = functionsfile.reshape_coordinates(return_scaled_coord, orginaldata)
             flattenarray = functionsfile.flatten_coord(coord_reshap)
             s2 = functionsfile.result_of_prediction(flattenarray, model)
-            result=functionsfile.strokethree_urdu_alphabet(s2)
+            result= functionsfile.strokethree_urdu_alphabet(s2)
         else:
             model = tf.keras.models.load_model("model/threeAstrokemodel.h5")
             stroke1 = functionsfile.flattencoordmodelinput(coordinates[0], Variables.data['firststroke3A'])
@@ -211,7 +206,7 @@ def predict(coordinates, noofstroke):
             coord_reshap = functionsfile.reshape_coordinates(return_scaled_coord, orginaldata)
             flattenarray = functionsfile.flatten_coord(coord_reshap)
             s2 = functionsfile.result_of_prediction(flattenarray, model)
-            result=functionsfile.strokethreeA_urdu_alphabet(s2)
+            result= functionsfile.strokethreeA_urdu_alphabet(s2)
     elif noofstroke == 4:
         # givenlistcoord = ast.literal_eval(li[row_idx][0])
         model = tf.keras.models.load_model("model/fourstrokemodel.h5")
@@ -225,7 +220,7 @@ def predict(coordinates, noofstroke):
         coord_reshap = functionsfile.reshape_coordinates(return_scaled_coord, orginaldata)
         flattenarray = functionsfile.flatten_coord(coord_reshap)
         s2 = functionsfile.result_of_prediction(flattenarray, model)
-        result=functionsfile.strokefour_urdu_alphabet(s2)
+        result= functionsfile.strokefour_urdu_alphabet(s2)
 
     else:
         # Skip invalid stroke counts

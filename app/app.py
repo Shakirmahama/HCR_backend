@@ -18,7 +18,7 @@ def recognize():
         print(len(coordinates))
         formated_data= functionsfile.convert(coordinates)
         print(len(formated_data))
-        result=predictionfile.predict(formated_data, num_stroke)
+        result= predictionfile.predict(formated_data, num_stroke)
         # Display the received data on the console
         print("Received Data:")
         print(result)
